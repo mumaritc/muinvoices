@@ -1,4 +1,47 @@
 import { test, expect } from '@playwright/test'
+
+test('a second item with one named tax updates totals and survives save/reload', async ({
+  page,
+}) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'New invoice', exact: true }).first().click()
+  await page.getByRole('button', { name: 'Company / From', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Name · English', exact: true }).fill('Synthetic seller')
+  await page.getByRole('button', { name: 'Items & taxes', exact: true }).click()
+  await page.getByRole('button', { name: 'Named taxes', exact: true }).click()
+  await page.getByRole('button', { name: 'Add named tax', exact: true }).click()
+  await page.getByRole('textbox', { name: 'Name · English', exact: true }).fill('VAT 15')
+  await page.getByRole('textbox', { name: 'Rate (%)', exact: true }).fill('15')
+  await page.getByRole('button', { name: 'Line items', exact: true }).click()
+  await page
+    .getByRole('textbox', { name: 'Description · English', exact: true })
+    .fill('First service')
+  await page.getByRole('textbox', { name: 'Unit price', exact: true }).fill('100')
+  await page.getByRole('combobox', { name: 'Tax treatment' }).selectOption('taxed')
+  await page.getByRole('checkbox', { name: 'VAT 15', exact: true }).check()
+  await page.getByRole('button', { name: 'Add item', exact: true }).click()
+  const second = page.locator('.item-card').nth(1)
+  await second
+    .getByRole('textbox', { name: 'Description · English', exact: true })
+    .fill('Second service')
+  await second.getByRole('textbox', { name: 'Quantity', exact: true }).fill('10')
+  await second.getByRole('textbox', { name: 'Unit price', exact: true }).fill('215')
+  await second.getByRole('combobox', { name: 'Tax treatment' }).selectOption('taxed')
+  await second.getByRole('checkbox', { name: 'VAT 15', exact: true }).check()
+  await expect(page.locator('.validation-box')).toHaveCount(0)
+  await expect(page.getByTestId('invoice').locator('.grand-total')).toContainText('2587.50')
+  await expect(page.getByRole('button', { name: 'Print / save PDF' })).toBeEnabled()
+  await page.getByRole('button', { name: 'Save now', exact: true }).click()
+  await expect(page.getByRole('status').first()).toContainText('All changes saved')
+  await page.reload()
+  await page.getByRole('button', { name: 'INV-', exact: false }).first().click()
+  await expect(page.getByTestId('invoice').locator('.grand-total')).toContainText('2587.50')
+  await expect(page.getByTestId('invoice')).toContainText('Second service')
+  await page.getByRole('button', { name: 'Items & taxes', exact: true }).click()
+  await expect(
+    page.locator('.item-card').nth(1).getByRole('checkbox', { name: 'VAT 15', exact: true }),
+  ).toBeChecked()
+})
 test('edits, calculates, saves, reloads, duplicates and blocks invalid printing', async ({
   page,
 }) => {

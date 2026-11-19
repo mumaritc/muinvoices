@@ -1,4 +1,4 @@
-import { useFieldArray, useFormContext, useWatch } from 'react-hook-form'
+import { Controller, useFieldArray, useFormContext, useWatch } from 'react-hook-form'
 import { Plus, ArrowUp, ArrowDown } from 'lucide-react'
 import { type FieldPath } from 'react-hook-form'
 import { type Invoice } from '../../features/invoices/schema'
@@ -167,12 +167,34 @@ export function ItemsForm({ lang }: Lang) {
               values={['none', 'taxed', 'zeroRated', 'exempt']}
               lang={lang}
             />
-            {liveTaxes.map((tax) => (
-              <label key={tax.id} className="check-label">
-                <input type="checkbox" value={tax.id} {...form.register(`items.${i}.taxIds`)} />
-                {tax.name[lang] || tax.name.en || tax.name.ar || t('tax', lang)}
-              </label>
-            ))}
+            <Controller
+              control={form.control}
+              name={`items.${i}.taxIds`}
+              render={({ field }) => (
+                <>
+                  {liveTaxes.map((tax, taxIndex) => (
+                    <label key={tax.id} className="check-label">
+                      <input
+                        type="checkbox"
+                        name={field.name}
+                        value={tax.id}
+                        ref={taxIndex === 0 ? field.ref : undefined}
+                        checked={field.value.includes(tax.id)}
+                        onBlur={field.onBlur}
+                        onChange={(event) =>
+                          field.onChange(
+                            event.target.checked
+                              ? [...field.value, tax.id]
+                              : field.value.filter((id) => id !== tax.id),
+                          )
+                        }
+                      />
+                      {tax.name[lang] || tax.name.en || tax.name.ar || t('tax', lang)}
+                    </label>
+                  ))}
+                </>
+              )}
+            />
             <LocalFields
               name={`items.${i}.explanation`}
               label={t('explanation', lang)}
