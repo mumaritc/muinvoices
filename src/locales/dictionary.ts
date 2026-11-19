@@ -1,5 +1,13 @@
 import { type LocalizedText } from '../features/invoices/schema'
 export const copy = {
+  githubLink: [
+    'View muinvoice on GitHub (opens in a new tab)',
+    'عرض muinvoice على GitHub (يفتح في علامة تبويب جديدة)',
+  ],
+  websiteLink: [
+    'Visit mumaritc.com (opens in a new tab)',
+    'زيارة mumaritc.com (يفتح في علامة تبويب جديدة)',
+  ],
   metadata: ['Invoice details', 'بيانات الفاتورة'],
   appearance: ['Appearance', 'المظهر'],
   lineItems: ['Line items', 'بنود الفاتورة'],

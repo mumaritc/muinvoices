@@ -179,6 +179,26 @@ input[type='checkbox'] {
   margin-top: auto;
   padding-top: 40px;
 }
+.sidebar-links {
+  display: flex;
+  gap: 8px;
+  margin-block-start: 16px;
+}
+.sidebar-links a {
+  display: grid;
+  place-items: center;
+  min-inline-size: 44px;
+  min-block-size: 44px;
+  border-radius: 8px;
+  color: var(--primary);
+}
+.sidebar-links a:hover {
+  background: var(--muted);
+}
+.sidebar-links a:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
 .sidebar-bottom strong {
   font-size: 12px;
   display: block;

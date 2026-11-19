@@ -5,7 +5,6 @@ choose from 25 layouts, customize English, Arabic or bilingual output, and print
 save as PDF.
 
 **Public beta · MIT licensed.** Production URL: **https://invoices.mumaritc.com**
-(deployment pending). See [release status](docs/release.md) for verification and known limits.
 
 ## Features
 
