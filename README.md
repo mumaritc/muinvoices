@@ -43,7 +43,6 @@ a manually triggered workflow releases it to GitHub Pages.
 ## Documentation
 
 - [User guide](docs/guide.md): editing, backups, rounding, printing and offline use.
-- [Deployment](docs/deployment.md): GitHub Pages, custom domain, HTTPS and updates.
 - [Contributing](CONTRIBUTING.md): setup and verification commands.
 - [Architecture](docs/architecture.md) and [design decisions](docs/decisions.md).
 - [Release status](docs/release.md): automated evidence and outstanding manual checks.
