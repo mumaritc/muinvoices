@@ -1,0 +1,17 @@
+node_modules/
+dist/
+*.tsbuildinfo
+test-results/
+playwright-report/
+output/
+.npm-cache/
+.tools/
+test-results-offline/
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+Thumbs.db
+coverage/
+.private/

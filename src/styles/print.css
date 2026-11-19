@@ -1,0 +1,82 @@
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+@media print {
+  html,
+  body,
+  #root,
+  .app-shell,
+  .main-shell,
+  .editor-workspace,
+  .preview-pane,
+  .paper-wrap {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
+    background: white !important;
+    transform: none !important;
+    position: static !important;
+  }
+  .app-sidebar,
+  .app-header,
+  .document-toolbar,
+  .editor-pane,
+  .preview-heading,
+  .preview-warning,
+  .print-help,
+  .mobile-switch,
+  .backup-reminder,
+  .global-error {
+    display: none !important;
+  }
+  .invoice {
+    width: 100%;
+    min-height: 0;
+    padding: 0;
+    box-shadow: none;
+    transform: none;
+    zoom: 1;
+  }
+  .paper-wrap {
+    box-shadow: none !important;
+    border: 0 !important;
+    zoom: 1 !important;
+  }
+  .invoice thead {
+    display: table-header-group;
+  }
+  .invoice tfoot {
+    display: table-footer-group;
+  }
+  .invoice tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .invoice tr.oversized-row {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+  .invoice .invoice-sections section {
+    break-inside: auto;
+  }
+  .invoice h2,
+  .invoice h3 {
+    break-after: avoid;
+  }
+  .invoice img {
+    max-width: 100%;
+  }
+}
+@media print {
+  .invoice .oversized-block {
+    break-inside: auto;
+  }
+  .invoice .pure-header {
+    break-inside: auto;
+  }
+}

@@ -1,0 +1,10 @@
+node_modules
+dist
+output
+.tools
+test-results
+playwright-report
+package-lock.json
+public/thumbnails
+public/licenses
+test-results-offline
